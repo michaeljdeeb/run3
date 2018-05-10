@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import randomColor from 'randomcolor';
 import styled from 'styled-components';
-import { hex } from 'wcag-contrast';
 
 import Disclaimer from './disclaimer';
 import Navigation from './navigation';
@@ -42,17 +41,19 @@ class App extends Component {
   componentWillMount() {
     const background = randomColor({ luminosity: 'dark' });
     const light = randomColor({ hue: background, luminosity: 'light' });
-    let accentSet = randomColor({ hue: background, luminosity: 'bright', count: 100 });
+    // let accentSet = randomColor({ hue: background, luminosity: 'bright', count: 100 });
 
-    let accent;
-    do {
-      accent = accentSet.pop();
-
-      if (!accent) {
-        accentSet = randomColor({ hue: background, luminosity: 'bright', count: 100 });
-        accent = accentSet.pop();
-      }
-    } while (hex(background, accent) < 1);
+    const accent = randomColor({ hue: background, luminosity: 'bright' });
+/**
+  *     do {
+  *       accent = accentSet.pop();
+  * 
+  *       if (!accent) {
+  *         accentSet = randomColor({ hue: background, luminosity: 'bright', count: 100 });
+  *         accent = accentSet.pop();
+  *       }
+  *     } while (hex(background, accent) < 1);
+  */
 
     this.setState({
       accent,
