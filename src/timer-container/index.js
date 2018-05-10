@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Duration from 'luxon/src/duration';
 import styled from 'styled-components';
 
 import ElapsedRemaining from '../elapsed-remaining';
 import HeroTimer from '../hero-timer';
 import PlayPause from '../play-pause';
 import schedule from '../utils/schedule';
+import { Duration } from '../luxon';
 
 const FlexContainer = styled.div`
   display: flex;
@@ -37,7 +37,6 @@ class TimerContainer extends Component {
     const nextSetIndex = setIndex + 1;
 
     if (duration === 0 && set[nextSetIndex] !== undefined) {
-      console.log(set[nextSetIndex]);
       this.setState({
         duration: set[nextSetIndex] - 1,
         elapsed: elapsed + 1,
