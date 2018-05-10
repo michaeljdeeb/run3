@@ -6,16 +6,11 @@ import styled from 'styled-components';
 const PlayPauseFlex = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 1.647rem;
+  margin: 1.647rem 0;
 `;
 
 const PlayPauseButton = styled.button`
-  appearance: none;
-  background: none;
-  border: none;
-  color: #fff;
   padding: 0.5rem;
-
 `;
 
 const PlayPause = props => {

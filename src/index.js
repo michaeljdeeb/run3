@@ -1,14 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { devToolsEnhancer } from 'redux-devtools-extension';
+import { BrowserRouter } from 'react-router-dom';
+
 import 'normalize.css';
 import './index.css';
 import App from './App';
+import rootReducer from './redux/rootReducer';
 import registerServiceWorker from './registerServiceWorker';
-import { BrowserRouter } from 'react-router-dom';
+import { loadState, saveState } from './localStore';
+
+const persistedState = loadState();
+const store = createStore(
+  rootReducer,
+  persistedState,
+  devToolsEnhancer(),
+);
+
+store.subscribe(() => {
+  saveState({
+    colors: store.getState().colors,
+    progress: store.getState().progress,
+    settings: store.getState().settings,
+  });
+});
 
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root'));
 registerServiceWorker();

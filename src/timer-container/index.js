@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import Disclaimer from '../disclaimer';
 import ElapsedRemaining from '../elapsed-remaining';
 import HeroTimer from '../hero-timer';
 import PlayPause from '../play-pause';
+
 import schedule from '../utils/schedule';
 import { Duration } from '../luxon';
+import { setProgress } from '../redux/progress';
 
 const FlexContainer = styled.div`
   display: flex;
@@ -33,7 +38,14 @@ class TimerContainer extends Component {
   }
 
   tick() {
-    const { duration, elapsed, set, setIndex } = this.state;
+    const { dispatch } = this.props;
+    const { week, workout } = this.props.match.params;
+    const {
+      duration,
+      elapsed,
+      set,
+      setIndex,
+    } = this.state;
     const nextSetIndex = setIndex + 1;
 
     if (duration === 0 && set[nextSetIndex] !== undefined) {
@@ -52,6 +64,7 @@ class TimerContainer extends Component {
     } else if (duration === 0 && set[nextSetIndex] === undefined) {
       this.setState({ status: 'Complete' });
       this.controlTimer(false);
+      dispatch(setProgress(`${week}-${workout}`));
       clearInterval(this.timerID);
     } else {
       this.setState({
@@ -72,7 +85,14 @@ class TimerContainer extends Component {
   }
 
   render() {
-    const { duration, elapsed, paused, set, setIndex, status } = this.state;
+    const {
+      duration,
+      elapsed,
+      paused,
+      set,
+      setIndex,
+      status,
+    } = this.state;
     const { week, workout } = this.props.match.params;
     const prettyDuration = Duration.fromObject({ seconds: duration }).toFormat('mm:ss');
     const prettyElapsed = Duration.fromObject({ seconds: elapsed }).toFormat('mm:ss');
@@ -89,10 +109,28 @@ class TimerContainer extends Component {
           <HeroTimer status={status} duration={prettyDuration} />
           <ElapsedRemaining elapsed={prettyElapsed} remaining={prettyRemaining} />
           <PlayPause paused={paused} controlTimer={this.controlTimer} />
+          <Disclaimer />
         </FlexContainer>
       </div>
     );
   }
 }
 
-export default TimerContainer;
+TimerContainer.defaultProps = {
+  week: 1,
+  workout: 1,
+};
+
+TimerContainer.propTypes = {
+  match: PropTypes.object.isRequired,
+  week: PropTypes.number,
+  workout: PropTypes.number,
+};
+
+const mapStateToProps = state => (
+  {
+    progress: state.progress,
+  }
+);
+
+export default connect(mapStateToProps)(TimerContainer);

@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import randomColor from 'randomcolor';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import Disclaimer from './disclaimer';
+import HomeContainer from './home-container';
 import Navigation from './navigation';
 import Schedule from './schedule';
 import Settings from './settings';
 import TimerContainer from './timer-container';
 
+import generateColors from './utils/generateColors';
+import { setColors } from './redux/colors';
+
 const StyledApp = styled.div`
-  color: #fff;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -19,6 +21,15 @@ const StyledApp = styled.div`
   padding-left: calc(0.75rem + env(safe-area-inset-left));
   padding-right: calc(0.75rem + env(safe-area-inset-right));
   padding-top: env(safe-area-inset-top);
+`;
+
+const Background = styled.div`
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: -1;
 `;
 
 const Header = styled.div`
@@ -30,47 +41,23 @@ const Header = styled.div`
 `;
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      accent: '',
-      background: '',
-      light: '',
-    };
-  }
   componentWillMount() {
-    const background = randomColor({ luminosity: 'dark' });
-    const light = randomColor({ hue: background, luminosity: 'light' });
-    // let accentSet = randomColor({ hue: background, luminosity: 'bright', count: 100 });
-
-    const accent = randomColor({ hue: background, luminosity: 'bright' });
-/**
-  *     do {
-  *       accent = accentSet.pop();
-  * 
-  *       if (!accent) {
-  *         accentSet = randomColor({ hue: background, luminosity: 'bright', count: 100 });
-  *         accent = accentSet.pop();
-  *       }
-  *     } while (hex(background, accent) < 1);
-  */
-
-    this.setState({
-      accent,
-      background,
-      light,
-    });
+    const { dispatch, themeLocked } = this.props;
+    if (!themeLocked) {
+      dispatch(setColors(generateColors()));
+    }
   }
 
   render() {
-    const { accent, background, light } = this.state;
+    const { accent, background } = this.props;
     return (
-      <StyledApp style={{ backgroundColor: background }}>
-        <Header style={{ backgroundColor: background }}/>
-        <Navigation accent={accent} background={background} light={light} />
+      <StyledApp>
+        <Background style={{ backgroundColor: background }} />
+        <Header style={{ backgroundColor: background }} />
+        <Navigation accent={accent} background={background} />
         <Switch>
           <Route
-            component={Disclaimer}
+            component={HomeContainer}
             exact
             path="/"
           />
@@ -92,4 +79,12 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => (
+  {
+    accent: state.colors.accent,
+    background: state.colors.background,
+    themeLocked: state.settings.themeLocked,
+  }
+);
+
+export default withRouter(connect(mapStateToProps)(App));
