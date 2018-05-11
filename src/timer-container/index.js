@@ -106,7 +106,7 @@ class TimerContainer extends Component {
       <div>
         <h1>Week {week}<br />Workout {workout}</h1>
         <FlexContainer>
-          <HeroTimer status={status} duration={prettyDuration} />
+          <HeroTimer status={status} duration={prettyDuration} pulse={duration <= 5} />
           <ElapsedRemaining elapsed={prettyElapsed} remaining={prettyRemaining} />
           <PlayPause paused={paused} controlTimer={this.controlTimer} />
           <Disclaimer />

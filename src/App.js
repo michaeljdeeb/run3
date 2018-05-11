@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import Acknowledgements from './acknowledgements';
 import HomeContainer from './home-container';
+import Icon from './icon';
 import Navigation from './navigation';
 import Schedule from './schedule';
 import Settings from './settings';
@@ -24,6 +26,7 @@ const StyledApp = styled.div`
 `;
 
 const Background = styled.div`
+  background: ${props => `linear-gradient(${props.background} 10%, ${props.accent} 70%)`};
   bottom: 0;
   left: 0;
   position: fixed;
@@ -33,11 +36,20 @@ const Background = styled.div`
 `;
 
 const Header = styled.div`
+  background-color: ${props => props.background};
   height: env(safe-area-inset-top);
   left: 0;
   position: fixed;
   right: 0;
   top: 0;
+`;
+
+const Info = styled.div`
+  color: ${props => props.accent};
+  display: flex;
+  justify-content: flex-end;
+  margin-top: ${props => props.safeArea ? '0.1rem' : '0.75rem'};
+  visibility: ${props => props.hide ? 'hidden' : 'visible'};
 `;
 
 class App extends Component {
@@ -49,11 +61,20 @@ class App extends Component {
   }
 
   render() {
-    const { accent, background } = this.props;
+    const { accent, background, progress } = this.props;
+    const { pathname } = this.props.location;
     return (
       <StyledApp>
-        <Background style={{ backgroundColor: background }} />
-        <Header style={{ backgroundColor: background }} />
+        <Background background={background} accent={accent} />
+        <Header background={background} />
+        <Info
+          hide={/week/.test(pathname)}
+          safeArea={CSS.supports('padding-top: env(safe-area-inset-top)')}
+        >
+          <Link to="/acknowledgements">
+            <Icon color={accent} icon="acknowledgements" size="2x" />
+          </Link>
+        </Info>
         <Navigation accent={accent} background={background} />
         <Switch>
           <Route
@@ -62,8 +83,14 @@ class App extends Component {
             path="/"
           />
           <Route
-            component={Schedule}
+            component={Acknowledgements}
+            path="/acknowledgements"
+          />
+          <Route
             path="/schedule"
+            render={() => (
+              <Schedule progress={progress} />
+            )}
           />
           <Route
             component={TimerContainer}
@@ -83,6 +110,7 @@ const mapStateToProps = state => (
   {
     accent: state.colors.accent,
     background: state.colors.background,
+    progress: state.progress,
     themeLocked: state.settings.themeLocked,
   }
 );

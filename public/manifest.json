@@ -3,9 +3,34 @@
   "name": "Run Three",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "manifest-48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "manifest-96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "manifest-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "manifest-256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "manifest-384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "manifest-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
   "start_url": ".",

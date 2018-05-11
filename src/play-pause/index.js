@@ -1,7 +1,7 @@
 import React from 'react';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import { faPauseCircle, faPlayCircle  } from '@fortawesome/fontawesome-free-regular';
 import styled from 'styled-components';
+
+import Icon from '../icon';
 
 const PlayPauseFlex = styled.div`
   display: flex;
@@ -18,7 +18,7 @@ const PlayPause = props => {
   return (
     <PlayPauseFlex>
       <PlayPauseButton onClick={() => controlTimer(paused)}>
-        <FontAwesomeIcon icon={paused ? faPlayCircle : faPauseCircle} size="5x" />
+        <Icon icon={paused ? 'play' : 'pause'} size="5x" />
       </PlayPauseButton>
     </PlayPauseFlex>
 
