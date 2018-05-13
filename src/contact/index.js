@@ -48,6 +48,7 @@ const Submit = styled.button`
   border-radius: 3rem;
   font-weight: 700;
   margin-bottom: 1rem;
+  margin-top: ${props => props.message ? '1rem' : 0};
   padding: 0.5rem 1rem;
   text-transform: uppercase;
 `;
@@ -83,7 +84,7 @@ class Contact extends PureComponent {
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'Contact', ...this.state }),
+      body: encode({ 'form-name': 'RunThreeFeedback', ...this.state }),
     })
       .then(() => {
         this.setState({
@@ -107,7 +108,7 @@ class Contact extends PureComponent {
         data-netlify="true"
         data-netlify-honeypot="Coach"
         method="POST"
-        name="Contact"
+        name="RunThreeFeedback"
         onSubmit={this.handleSubmit}
       >
         <InputWrapper>
@@ -143,8 +144,8 @@ class Contact extends PureComponent {
             value={this.state.Message}
           />
         </InputWrapper>
-        <Submit type="submit">Submit</Submit>
         <div>{message}</div>
+        <Submit type="submit" message={message}>Submit</Submit>
       </form>
     );
   }
