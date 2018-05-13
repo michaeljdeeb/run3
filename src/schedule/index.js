@@ -16,18 +16,16 @@ const WorkoutList = styled.ol`
 
 const FlexLink = styled(Link)`
   align-items: center;
-  background: rgba(255, 255, 255, 0.2);
-  border-bottom: ${props => props.workout === '3' ? '0.2rem solid #fff' : 'none'};
-  border-top: 0.2rem solid #fff;
+  background: rgba(255, 255, 255, 0.15);
   display: flex;
   justify-content: flex-start;
+  margin: 0.2rem 0;
   padding: 0.5rem 1.5rem;
   text-decoration: none;
 `;
 
 const ListText = styled.div`
   margin-left: 1rem;
-  // text-transform: uppercase;
 `;
 
 

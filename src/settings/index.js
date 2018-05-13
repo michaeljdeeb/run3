@@ -12,7 +12,7 @@ const Button = styled.button`
   border-radius: 3rem;
   font-weight: 700;
   padding: 0.5rem 1rem;
-  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
   text-transform: uppercase;
 `;
 
@@ -170,8 +170,13 @@ const StyledToggle = styled(Toggle)`
   }
 `;
 
+const SettingsCategory = styled.h3`
+  margin-bottom: 0.25rem;
+`;
+
 const SubHeading = styled.h5`
   margin-bottom: 0.25rem;
+  margin-top: 0.25rem;
   text-transform: uppercase;
 `;
 
@@ -187,10 +192,7 @@ class Settings extends Component {
     return (
         <div>
           <h1>Settings</h1>
-          <h3>Theme</h3>
-          <div>
-            <Button onClick={() => dispatch(setColors(generateColors()))}>Change Theme Colors</Button>
-          </div>
+          <SettingsCategory>Theme</SettingsCategory>
           <Label>
             <StyledToggle
               accent={accent}
@@ -201,7 +203,10 @@ class Settings extends Component {
             />
             Lock Theme Colors
           </Label>
-          <h3>Other</h3>
+          <div>
+            <Button onClick={() => dispatch(setColors(generateColors()))}>Change Theme Colors</Button>
+          </div>
+          <SettingsCategory>Other</SettingsCategory>
           <Label>
             <StyledToggle
               accent={accent}
