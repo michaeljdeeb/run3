@@ -51,7 +51,7 @@ const Info = styled.div`
   color: ${props => props.accent};
   display: flex;
   justify-content: flex-end;
-  margin-top: ${props => props.safeArea ? '0.1rem' : '0.75rem'};
+  margin-top: 0.75rem;
   visibility: ${props => props.hide ? 'hidden' : 'visible'};
 `;
 
@@ -87,7 +87,6 @@ class App extends Component {
         <Header background={background} blur={supportsBackdrop()} />
         <Info
           hide={/week/.test(pathname)}
-          safeArea={CSS.supports('padding-top: env(safe-area-inset-top)')}
         >
           { renderInfo }
         </Info>
