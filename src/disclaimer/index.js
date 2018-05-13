@@ -26,7 +26,7 @@ const Disclaimer = () => (
     </Heading>
     <List>
       <ListItem>Add to your home screen before starting</ListItem>
-      <ListItem>Run Three must stay open</ListItem>
+      <ListItem>Run3 must stay open</ListItem>
       <ListItem>Your phone must stay unlocked</ListItem>
     </List>
     <p>

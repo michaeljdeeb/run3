@@ -22,7 +22,7 @@ class Acknowledgements extends PureComponent {
         <h1>About</h1>
         <AttributionTitle>Feedback</AttributionTitle>
         <p>
-          If you have any feedback about Run Three please fill out the form below. Your email address is only necessary if you would like a reply.
+          If you have any feedback about Run3 please fill out the form below. Your email address is only necessary if you would like a reply.
         </p>
         <Contact />
         <AttributionTitle>Acknowledgements</AttributionTitle>

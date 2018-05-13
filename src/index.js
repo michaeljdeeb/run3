@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Analytics from 'react-router-ga';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { devToolsEnhancer } from 'redux-devtools-extension';
@@ -30,7 +31,9 @@ store.subscribe(() => {
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <Analytics id="UA-49663508-4">
+        <App />
+      </Analytics>
     </BrowserRouter>
   </Provider>,
   document.getElementById('root'));
