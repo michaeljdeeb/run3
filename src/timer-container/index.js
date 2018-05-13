@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Disclaimer from '../disclaimer';
 import ElapsedRemaining from '../elapsed-remaining';
 import HeroTimer from '../hero-timer';
+import Next from '../next';
 import PlayPause from '../play-pause';
 
 import schedule from '../utils/schedule';
@@ -164,6 +165,10 @@ class TimerContainer extends Component {
     }
   }
 
+  prettyMinutes(seconds) {
+    return Duration.fromObject({ seconds }).toFormat('mm:ss');
+  }
+
   render() {
     const {
       duration,
@@ -174,13 +179,13 @@ class TimerContainer extends Component {
       status,
     } = this.state;
     const { week, workout } = this.props.match.params;
-    const prettyDuration = Duration.fromObject({ seconds: duration }).toFormat('mm:ss');
-    const prettyElapsed = Duration.fromObject({ seconds: elapsed }).toFormat('mm:ss');
+    const prettyDuration = this.prettyMinutes(duration);
+    const prettyElapsed = this.prettyMinutes(elapsed);
     const remainingSets = set.slice(setIndex + 1);
     const remaining = remainingSets.length ?
       remainingSets.reduce((accumulator, currentValue) => accumulator + currentValue) + duration :
       duration;
-    const prettyRemaining = Duration.fromObject({ seconds: remaining }).toFormat('mm:ss');
+    const prettyRemaining = this.prettyMinutes(remaining);
 
     return (
       <div>
@@ -195,6 +200,7 @@ class TimerContainer extends Component {
             paused={paused}
             stepThrough={this.stepThrough}
           />
+          { set[setIndex + 1] ? <Next prettyDuration={this.prettyMinutes(set[setIndex + 1])} status={this.renderStatus(set, setIndex + 1)} /> : '' }
           <Disclaimer />
         </FlexContainer>
       </div>
