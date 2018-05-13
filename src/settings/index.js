@@ -186,7 +186,7 @@ class Settings extends Component {
     const ttsWarning = tts ? (
       <div>
         <SubHeading>Note</SubHeading>
-        Speaking instructions requires the use of headphones or your device to not be on silent. The app may also pause your music indefinitely, even after the app has finished speaking.
+        Speaking instructions requires the use of headphones or your device to not be silenced. The app may also pause your music indefinitely, even after the app has finished speaking.
       </div>
     ) : '';
     return (
