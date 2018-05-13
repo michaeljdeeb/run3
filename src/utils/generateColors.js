@@ -22,9 +22,10 @@ const nextAccessible = (accent, background, ratio) => {
   }
 
   let ratioLighter = currentRatio;
+  let colorLighter;
   let i = 0;
   while (ratioLighter < ratio && i < 100) {
-    let colorLighter = Color(accent).hsl();
+    colorLighter = Color(accent).hsl();
 
     i += 0.1;
     colorLighter.color[2] += i;
@@ -36,7 +37,7 @@ const nextAccessible = (accent, background, ratio) => {
       return Color(colorLighter).rgb().array();
     }
   }
-  return Color(accent).rgb().array();
+  return Color(colorLighter).rgb().array();
 };
 
 export default () => {
@@ -45,7 +46,7 @@ export default () => {
   const backgroundAlpha = `rgba(${backgroundArray[0]}, ${backgroundArray[1]}, ${backgroundArray[2]}, 0.15)`;
 
   const dangerousAccent = randomColor({ hue: rgbToHex(backgroundArray), luminosity: 'bright' });
-  const accentArray = nextAccessible(dangerousAccent, background, 3);
+  const accentArray = nextAccessible(dangerousAccent, background, 2.5);
   const accent = `rgb(${accentArray[0]}, ${accentArray[1]}, ${accentArray[2]})`;
   const accentAlpha = `rgba(${accentArray[0]}, ${accentArray[1]}, ${accentArray[2]}, 0.15)`;
 
