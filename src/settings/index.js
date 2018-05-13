@@ -181,13 +181,13 @@ class Settings extends Component {
     const ttsWarning = tts ? (
       <div>
         <SubHeading>Note</SubHeading>
-        Speaking instructions requires the use of headphones or your device not be on silent. The app may also pause your music indefinitely, even after the app has finished speaking.
+        Speaking instructions requires the use of headphones or your device to not be on silent. The app may also pause your music indefinitely, even after the app has finished speaking.
       </div>
     ) : '';
     return (
         <div>
           <h1>Settings</h1>
-          <h2>Theme</h2>
+          <h3>Theme</h3>
           <div>
             <Button onClick={() => dispatch(setColors(generateColors()))}>Change Theme Colors</Button>
           </div>
@@ -201,6 +201,7 @@ class Settings extends Component {
             />
             Lock Theme Colors
           </Label>
+          <h3>Other</h3>
           <Label>
             <StyledToggle
               accent={accent}
