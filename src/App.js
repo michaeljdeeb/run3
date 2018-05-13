@@ -13,6 +13,8 @@ import TimerContainer from './timer-container';
 
 import generateColors from './utils/generateColors';
 import { setColors } from './redux/colors';
+import { setLastViewed } from './redux/lastViewed';
+import supportsBackdrop from './utils/supportsBackdrop';
 
 const StyledApp = styled.div`
   display: flex;
@@ -36,7 +38,8 @@ const Background = styled.div`
 `;
 
 const Header = styled.div`
-  background-color: ${props => props.background};
+  background-color: ${props => props.blur ? props.backgroundAlpha : props.background};
+  backdrop-filter: ${props => props.blur ? 'blur(20px)' : 'none'};
   height: env(safe-area-inset-top);
   left: 0;
   position: fixed;
@@ -60,22 +63,35 @@ class App extends Component {
     }
   }
 
+  setLastViewed() {
+    this.setState({ lastViewed: this.props.location.pathname });
+  }
+
   render() {
-    const { accent, background, progress } = this.props;
+    const { accent, accentAlpha, background, dispatch, lastViewed, progress } = this.props;
     const { pathname } = this.props.location;
+
+    const renderInfo = /acknowledgements/.test(pathname) ? (
+      <Link to={lastViewed}>
+        <Icon color={accent} icon="close" size="2x" />
+      </Link>
+    ) : (
+      <Link to="/acknowledgements" onClick={() => dispatch(setLastViewed(pathname))}>
+        <Icon color={accent} icon="acknowledgements" size="2x" />
+      </Link>
+    );
+
     return (
       <StyledApp>
         <Background background={background} accent={accent} />
-        <Header background={background} />
+        <Header background={background} blur={supportsBackdrop()} />
         <Info
           hide={/week/.test(pathname)}
           safeArea={CSS.supports('padding-top: env(safe-area-inset-top)')}
         >
-          <Link to="/acknowledgements">
-            <Icon color={accent} icon="acknowledgements" size="2x" />
-          </Link>
+          { renderInfo }
         </Info>
-        <Navigation accent={accent} background={background} />
+        <Navigation accent={accent} accentAlpha={accentAlpha} background={background} />
         <Switch>
           <Route
             component={HomeContainer}
@@ -83,8 +99,10 @@ class App extends Component {
             path="/"
           />
           <Route
-            component={Acknowledgements}
             path="/acknowledgements"
+            render={() => (
+              <Acknowledgements dispatch={dispatch} />
+            )}
           />
           <Route
             path="/schedule"
@@ -109,7 +127,10 @@ class App extends Component {
 const mapStateToProps = state => (
   {
     accent: state.colors.accent,
+    accentAlpha: state.colors.accentAlpha,
     background: state.colors.background,
+    backgroundAlpha: state.colors.backgroundAlpha,
+    lastViewed: state.lastViewed,
     progress: state.progress,
     themeLocked: state.settings.themeLocked,
   }

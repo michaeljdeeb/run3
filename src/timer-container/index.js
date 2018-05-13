@@ -31,6 +31,38 @@ class TimerContainer extends Component {
       status: 'Warmup',
     };
     this.controlTimer = this.controlTimer.bind(this);
+    this.stepThrough = this.stepThrough.bind(this);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { duration, set, setIndex, status } = this.state;
+    const { tts } = this.props;
+
+    let message;
+    if (tts && (prevState.status !== status || (setIndex === 0 && duration === set[setIndex]))) {
+      switch (status) {
+        case 'Warmup':
+          message = 'Start your warmup.';
+          break;
+        case 'Run':
+          message = 'Start running.';
+          break;
+        case 'Walk':
+          message = 'Start walking.';
+          break;
+        case 'Cooldown':
+          message = 'Start your cooldown.';
+          break;
+        case 'Complete':
+          message = 'Congrats, You\'re finished! Let\'s run again in two days.';
+          break;
+        default:
+          break;
+      }
+      const speechObject = new SpeechSynthesisUtterance(message);
+      speechObject.lang = 'en-US';
+      window.speechSynthesis.speak(speechObject);
+    }
   }
 
   componentWillUnmount() {
@@ -74,13 +106,61 @@ class TimerContainer extends Component {
     }
   }
 
+  renderStatus(set, setIndex) {
+    if (setIndex === 0) {
+      return 'Warmup';
+    } else if (setIndex === set.length - 1) {
+      return 'Cooldown';
+    } else if (setIndex % 2 === 1) {
+      return 'Run';
+    }
+
+    return 'Walk';
+  }
+
   controlTimer(shouldPlay) {
+    const { set, status } = this.state;
     if (shouldPlay) {
+      if (status === 'Complete') {
+        this.setState({
+          duration: set[0],
+          elapsed: 0,
+          setIndex: 0,
+          status: this.renderStatus(set, 0),
+        });
+      }
       this.timerID = setInterval(() => this.tick(), 1000);
       this.setState({ paused: false });
     } else {
       clearInterval(this.timerID);
       this.setState({ paused: true });
+    }
+  }
+
+  stepThrough(direction) {
+    const { set, setIndex } = this.state;
+    if (direction === 'back') {
+      if (setIndex === 0) {
+        this.setState({
+          duration: set[0],
+        });
+      } else {
+        this.setState({
+          duration: set[setIndex - 1],
+          setIndex: setIndex - 1,
+          status: this.renderStatus(set, setIndex - 1),
+        });
+      }
+    } else {
+      if (setIndex === set.length - 1) {
+        this.setState({ duration: 0 });
+      } else {
+        this.setState({
+          duration: set[setIndex + 1],
+          setIndex: setIndex + 1,
+          status: this.renderStatus(set, setIndex + 1),
+        });
+      }
     }
   }
 
@@ -106,9 +186,15 @@ class TimerContainer extends Component {
       <div>
         <h1>Week {week}<br />Workout {workout}</h1>
         <FlexContainer>
-          <HeroTimer status={status} duration={prettyDuration} pulse={duration <= 5} />
+          <HeroTimer status={status} duration={prettyDuration} pulse={duration <= 5 && setIndex !== set.length - 1} />
           <ElapsedRemaining elapsed={prettyElapsed} remaining={prettyRemaining} />
-          <PlayPause paused={paused} controlTimer={this.controlTimer} />
+          <PlayPause
+            controlTimer={this.controlTimer}
+            disableBack={(setIndex === 0 && duration === set[0]) || status === 'Complete'}
+            disableForward={status === 'Complete'}
+            paused={paused}
+            stepThrough={this.stepThrough}
+          />
           <Disclaimer />
         </FlexContainer>
       </div>
@@ -130,6 +216,7 @@ TimerContainer.propTypes = {
 const mapStateToProps = state => (
   {
     progress: state.progress,
+    tts: state.settings.tts,
   }
 );
 

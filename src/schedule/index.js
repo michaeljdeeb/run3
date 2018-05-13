@@ -7,20 +7,25 @@ import schedule from '../utils/schedule';
 
 const WorkoutList = styled.ol`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   list-style: none;
   padding: 0;
 `;
 
 const FlexLink = styled(Link)`
   align-items: center;
+  border: 0.2rem solid #fff;
+  border-radius: 3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 0.5rem 1.5rem;
+  text-decoration: none;
 `;
 
 const ListText = styled.div`
   margin-top: 0.5rem;
+  text-transform: uppercase;
 `;
 
 class Schedule extends Component {
@@ -31,7 +36,7 @@ class Schedule extends Component {
         <li key={`${week}-${workout}`}>
           <FlexLink to={`/week/${week}/workout/${workout}`}>
             <Icon icon={progress[`${week}-${workout}`] ? 'complete' : 'incomplete'} size="2x" />
-            <ListText>Workout {workout}</ListText>
+            <ListText>Run {workout}</ListText>
           </FlexLink>
         </li>
       ));

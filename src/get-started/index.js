@@ -10,8 +10,10 @@ const HeroContainer = styled.div`
 const HeroLink = styled(Link)`
   border: 0.2rem solid #fff;
   border-radius: 3rem;
+  font-weight: 700;
   padding: 1rem 4rem;
   text-decoration: none;
+  text-transform: uppercase;
 `;
 
 const GetStarted = (props) => {
