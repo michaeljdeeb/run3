@@ -30,7 +30,7 @@ const Disclaimer = () => (
       <ListItem>Your phone must stay unlocked</ListItem>
     </List>
     <p>
-      Pick your running playlist and finish those replies before starting.
+      Pick your running playlist and finish those replies before starting your workout.
     </p>
   </div>
 );
