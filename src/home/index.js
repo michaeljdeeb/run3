@@ -1,8 +1,10 @@
 import React from 'react';
 
+import { H1 } from '../styles/headings';
+
 const Home = () => (
   <div>
-    <h1>Run3</h1>
+    <H1>Run3</H1>
     <p>
       Run3 is an interactive way to pace yourself as you begin running.
     </p>

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import Icon from '../icon';
 
+import { H1, H5 } from '../styles/headings';
 import schedule from '../utils/schedule';
 
 const WorkoutList = styled.ol`
@@ -26,15 +27,6 @@ const FlexLink = styled(Link)`
   text-decoration: none;
 `;
 
-const Week = styled.h3`
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 0.3rem;
-  margin-top: 2rem;
-  text-transform: uppercase;
-`;
-
-
 class Schedule extends Component {
   render() {
     const { progress } = this.props;
@@ -49,7 +41,7 @@ class Schedule extends Component {
       ));
 
       return [
-        <Week key={`h3-${week}`}>Week {week}</Week>,
+        <H5 key={`h3-${week}`}>Week {week}</H5>,
         <WorkoutList key={`ol-${week}`}>
           { renderWeek }
         </WorkoutList>,
@@ -58,7 +50,7 @@ class Schedule extends Component {
 
     return (
       <div>
-        <h1>Schedule</h1>
+        <H1>Schedule</H1>
         { renderSchedule }
       </div>
     );

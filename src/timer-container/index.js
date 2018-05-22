@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 
 import Disclaimer from '../disclaimer';
 import ElapsedRemaining from '../elapsed-remaining';
@@ -11,13 +10,9 @@ import PlayPause from '../play-pause';
 
 import schedule from '../utils/schedule';
 import { Duration } from '../luxon';
+import { FlexColumnContainer } from '../styles/containers';
+import { H1 } from '../styles/headings';
 import { setProgress } from '../redux/progress';
-
-const FlexContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 
 class TimerContainer extends Component {
   constructor(props) {
@@ -193,8 +188,8 @@ class TimerContainer extends Component {
 
     return (
       <div>
-        <h1>Week {week}<br />Workout {workout}</h1>
-        <FlexContainer>
+        <H1>Week {week}<br />Workout {workout}</H1>
+        <FlexColumnContainer>
           <HeroTimer
             status={status}
             duration={prettyDuration}
@@ -210,7 +205,7 @@ class TimerContainer extends Component {
           />
           { set[setIndex + 1] ? <Next prettyDuration={this.prettyMinutes(set[setIndex + 1])} status={this.renderStatus(set, setIndex + 1)} /> : '' }
           <Disclaimer />
-        </FlexContainer>
+        </FlexColumnContainer>
       </div>
     );
   }

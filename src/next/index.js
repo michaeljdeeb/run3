@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const FlexColumn = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
+import { FlexColumnCenterContainer } from '../styles/containers';
+
+const FlexColumn = FlexColumnCenterContainer.extend`
+  font-size: 1.176rem;
   margin: 0 0 1.647rem;
   text-transform: uppercase;
 `;

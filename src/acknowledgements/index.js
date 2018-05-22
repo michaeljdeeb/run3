@@ -1,15 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 import Contact from '../contact';
 
 import { unsetLastViewed } from '../redux/lastViewed';
 
-const AttributionTitle = styled.h5`
-  text-transform: uppercase;
-  margin: 0.5rem 0;
-`;
+import { H1, H5 } from '../styles/headings';
+import { NoMarginP } from'../styles/paragraph';
 
 class Acknowledgements extends PureComponent {
   componentWillUnmount() {
@@ -20,20 +17,16 @@ class Acknowledgements extends PureComponent {
   render() {
     return (
       <div>
-        <h1>About</h1>
-        <AttributionTitle>Feedback</AttributionTitle>
-        <p>
-          If you have any feedback about Run3 please fill out the form below. Your email address is only necessary if you would like a reply.
-        </p>
+        <H1>About</H1>
         <Contact />
-        <AttributionTitle>Acknowledgements</AttributionTitle>
-        <p>
+        <H5>Acknowledgements</H5>
+        <NoMarginP>
           Treadmill icon provided by <a href="https://thenounproject.com/smashicons/">Ben Davis</a> from <a href="https://thenounproject.com">The Noun Project</a>.
-        </p>
+        </NoMarginP>
         <p>All other icons provided by Font Awesome.</p>
-        <AttributionTitle>Font Awesome Free 5.0.10</AttributionTitle>
+        <H5>Font Awesome Free 5.0.10</H5>
         <a href="https://fontawesome.com">https://fontawesome.com</a>
-        <AttributionTitle>License</AttributionTitle>
+        <H5>License</H5>
         <a href="https://fontawesome.com/license">https://fontawesome.com/license</a>
         <div>(Icons: CC BY 4.0, Code: MIT License)</div>
       </div>

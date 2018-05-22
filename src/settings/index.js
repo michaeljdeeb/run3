@@ -8,18 +8,12 @@ import { setColors } from '../redux/colors';
 import { toggleThemeLock, toggleTts } from '../redux/settings';
 import generateColors from '../utils/generateColors';
 
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+import { H1, H5 } from '../styles/headings';
+import { DefaultButton } from '../styles/buttons';
+import { FlexCenterContainer } from '../styles/containers';
 
-const Button = styled.button`
-  border: 0.2rem solid #fff;
-  border-radius: 3rem;
-  font-weight: 700;
-  padding: 0.5rem 1rem;
-  margin-top: 0.7rem;
-  text-transform: uppercase;
+const ButtonContainer = FlexCenterContainer.extend`
+  margin-top: 0.5rem;
 `;
 
 const Label = styled.label`
@@ -178,14 +172,6 @@ const StyledToggle = styled(Toggle)`
   }
 `;
 
-const Heading = styled.h3`
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 0.25rem;
-  margin-top: 2rem;
-  text-transform: uppercase;
-`;
-
 const Warning = styled.div`
   font-size: 0.9rem;
   margin-top: 0.25rem;
@@ -206,8 +192,8 @@ const Settings = (props) => {
   ) : '';
   return (
     <div>
-      <h1>Settings</h1>
-      <Heading>Theme</Heading>
+      <H1>Settings</H1>
+      <H5>Theme</H5>
       <Label>
         Lock Theme Colors
         <StyledToggle
@@ -219,9 +205,13 @@ const Settings = (props) => {
         />
       </Label>
       <ButtonContainer>
-        <Button onClick={() => dispatch(setColors(generateColors()))}>Change Theme Colors</Button>
+        <DefaultButton
+          onClick={() => dispatch(setColors(generateColors()))}
+        >
+          Change Theme Colors
+        </DefaultButton>
       </ButtonContainer>
-      <Heading>Other</Heading>
+      <H5>Other</H5>
       <Label>
         Speak Instructions
         <StyledToggle

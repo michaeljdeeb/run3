@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const HeroContainer = styled.div`
-  display: flex;
-  justify-content: center;
+import { FlexCenterContainer } from '../styles/containers';
+
+const HeroContainer = FlexCenterContainer.extend`
   margin: 2.5rem 0;
 `;
+
 const HeroLink = styled(Link)`
   border: 0.2rem solid #fff;
   border-radius: 3rem;

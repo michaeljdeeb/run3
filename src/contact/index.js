@@ -1,56 +1,17 @@
 import React, { PureComponent } from 'react';
-import styled from 'styled-components';
 
-const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+import { H5 } from '../styles/headings';
+import { DefaultButton } from '../styles/buttons';
+import { FlexColumnContainer } from '../styles/containers';
+import { Input, TextArea } from '../styles/formUI';
+import { NoMarginP } from '../styles/paragraph';
+
+const InputWrapper = FlexColumnContainer.extend`
   max-width: 29.41rem;
-`;
-
-const Input = styled.input`
-  appearance: none;
-  background: none;
-  box-sizing: border-box;
-  border: 0.2rem solid #fff;
-  border-radius: 0;
-  color: #fff;
-  margin-bottom: 1rem;
-  padding: 0.47rem;
-  width: 100%;
-
-  &::placeholder {
-    color: #fff;
-  }
 `;
 
 const PhoneInput = Input.extend`
   display: none;
-`;
-
-const TextArea = styled.textarea`
-  appearance: none;
-  background: none;
-  box-sizing: border-box;
-  border: 0.2rem solid #fff;
-  border-radius: 0;
-  color: #fff;
-  margin-bottom: 1rem;
-  padding: 0.47rem;
-  width: 100%;
-
-  &::placeholder {
-    color: #fff;
-  }
-`;
-
-const Submit = styled.button`
-  border: 0.2rem solid #fff;
-  border-radius: 3rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  margin-top: ${props => (props.message ? '1rem' : 0)};
-  padding: 0.5rem 1rem;
-  text-transform: uppercase;
 `;
 
 const initialState = {
@@ -111,6 +72,10 @@ class Contact extends PureComponent {
         name="RunThreeFeedback"
         onSubmit={this.handleSubmit}
       >
+        <H5>Feedback</H5>
+        <NoMarginP>
+          If you have any feedback about Run3 please fill out the form below. Your email address is only necessary if you would like a reply.
+        </NoMarginP>
         <InputWrapper>
           <Input
             autoComplete="name"
@@ -145,7 +110,7 @@ class Contact extends PureComponent {
           />
         </InputWrapper>
         <div>{message}</div>
-        <Submit type="submit" message={message}>Submit</Submit>
+        <DefaultButton type="submit" message={message}>Submit</DefaultButton>
       </form>
     );
   }

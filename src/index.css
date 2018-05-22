@@ -3,46 +3,11 @@ html, body {
 }
 
 body {
-  color: #fff;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
   font-size: 17px;
   margin: 0;
   padding: 0;
 }
 
 a {
-  color: #fff;
-}
-
-h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  margin-top: 0.511rem;
-}
-
-h2 {
-  font-size: 1.647rem;
-}
-
-h3 {
-  font-size: 1.294rem;
-}
-
-h4 {
-  font-size: 1.765rem;
-}
-
-h5 {
-  font-size: 0.941rem;
-}
-
-h6 {
-  font-size: 0.882rem;
-}
-
-button {
-  appearance: none;
-  background: none;
-  border: none;
   color: #fff;
 }

@@ -1,34 +1,22 @@
 import React from 'react';
-import styled from 'styled-components';
 
-const Heading = styled.h5`
-  margin: 0;
-  text-transform: uppercase;
-`;
+import { H5 } from '../styles/headings';
+import { DashedLI, UL } from '../styles/lists';
 
-const List = styled.ul`
-  list-style: none;
-  padding-left: 0;
-`;
-
-const ListItem = styled.li`
+const BoldDashedLI = DashedLI.extend`
   font-weight: 700;
-
-  &::before {
-    content: '- ';
-  }
 `;
 
 const Disclaimer = () => (
   <div>
-    <Heading>
+    <H5>
       Progressive Web App Limitations
-    </Heading>
-    <List>
-      <ListItem>Add to your home screen before starting</ListItem>
-      <ListItem>Run3 must stay open</ListItem>
-      <ListItem>Your phone must stay unlocked</ListItem>
-    </List>
+    </H5>
+    <UL>
+      <BoldDashedLI>Add to your home screen before starting</BoldDashedLI>
+      <BoldDashedLI>Run3 must stay open</BoldDashedLI>
+      <BoldDashedLI>Your phone must stay unlocked</BoldDashedLI>
+    </UL>
     <p>
       Pick your running playlist and finish those replies before starting your workout.
     </p>

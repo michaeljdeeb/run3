@@ -2,21 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import pulseStyle from '../utils/pulseStyle';
+import pulseStyle from '../styles/pulseStyle';
+import { FlexCenterContainer, FlexColumnCenterContainer } from '../styles/containers';
 
-const Wrapper = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
+const Wrapper = FlexColumnCenterContainer.extend`
   margin: 1.647rem 0;
 `;
 
-const Container = styled.div`
+const Container = FlexCenterContainer.extend`
   animation: ${props => (props.pulse ? `${pulseStyle} 1s infinite` : 'none')};
-  display: flex;
   font-size: 1.647rem;
   font-weight: 700;
-  justify-content: center;
   text-transform: uppercase;
 `;
 

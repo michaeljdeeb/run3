@@ -7,11 +7,12 @@ import Icon from '../icon';
 
 import supportsBackdrop from '../utils/supportsBackdrop';
 
-const Nav = styled.nav`
+import { FlexContainer } from '../styles/containers';
+
+const Nav = FlexContainer.extend`
   background-color: ${props => (props.blur ? props.accentAlpha : props.accent)};
   backdrop-filter: ${props => (props.blur ? 'blur(20px)' : 'none')};
   bottom: 0;
-  display: flex;
   justify-content: space-around;
   left: 0;
   margin: 0;

@@ -1,21 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 import Icon from '../icon';
 
-const PlayPauseFlex = styled.div`
-  align-items: center;
-  display: flex;
-  justify-content: center;
+import { Button } from '../styles/buttons';
+import { FlexCenterContainer } from '../styles/containers';
+
+const PlayPauseFlex = FlexCenterContainer.extend`
   margin: 1.647rem 0;
 `;
 
-const PlayPauseButton = styled.button`
+const PlayPauseButton = Button.extend`
   padding: 0.5rem;
 `;
 
-const StepButton = styled.button`
+const StepButton = Button.extend`
   margin: 0 0.5rem;
   padding: 0.5rem;
 

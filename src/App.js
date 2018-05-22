@@ -17,10 +17,12 @@ import { setColors } from './redux/colors';
 import { setLastViewed } from './redux/lastViewed';
 import supportsBackdrop from './utils/supportsBackdrop';
 
-const StyledApp = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+import { Button } from './styles/buttons';
+import { FlexContainer, FlexColumnContainer } from './styles/containers';
+
+const StyledApp = FlexColumnContainer.extend`
+  color: #fff;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
   padding: 0 0.75rem 4rem;
   padding-bottom: calc(4rem + env(safe-area-inset-bottom));
   padding-left: calc(0.75rem + env(safe-area-inset-left));
@@ -48,20 +50,38 @@ const Header = styled.div`
   top: 0;
 `;
 
-const Info = styled.div`
+const Info = FlexContainer.extend`
   color: ${props => props.accent};
-  display: flex;
   justify-content: flex-end;
   margin-top: 0.75rem;
   visibility: ${props => (props.hide ? 'hidden' : 'visible')};
 `;
 
+const Padding = styled.div`
+  height: 2rem;
+  width: 100%;
+`;
+
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.infoClicked = this.infoClicked.bind(this);
+  }
+
   componentWillMount() {
     const { dispatch, themeLocked } = this.props;
     if (!themeLocked) {
       dispatch(setColors(generateColors()));
     }
+  }
+
+  infoClicked() {
+    const { dispatch, history } = this.props;
+    const { pathname } = this.props.location;
+
+    dispatch(setLastViewed(pathname));
+    history.push('/acknowledgements');
   }
 
   render() {
@@ -80,9 +100,9 @@ class App extends Component {
         <Icon color={accent} icon="close" size="2x" />
       </Link>
     ) : (
-      <Link to="/acknowledgements" onClick={() => dispatch(setLastViewed(pathname))}>
+      <Button onClick={this.infoClicked}>
         <Icon color={accent} icon="acknowledgements" size="2x" />
-      </Link>
+      </Button>
     );
 
     return (
@@ -122,6 +142,7 @@ class App extends Component {
             path="/settings"
           />
         </Switch>
+        <Padding />
       </StyledApp>
     );
   }
