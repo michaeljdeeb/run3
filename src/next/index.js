@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const FlexColumn = styled.div`
@@ -27,5 +28,10 @@ const Next = props => (
     </div>
   </FlexColumn>
 );
+
+Next.propTypes = {
+  status: PropTypes.string.isRequired,
+  prettyDuration: PropTypes.string.isRequired,
+};
 
 export default Next;

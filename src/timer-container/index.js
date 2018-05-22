@@ -36,7 +36,12 @@ class TimerContainer extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { duration, set, setIndex, status } = this.state;
+    const {
+      duration,
+      set,
+      setIndex,
+      status,
+    } = this.state;
     const { tts } = this.props;
 
     let message;
@@ -107,17 +112,6 @@ class TimerContainer extends Component {
     }
   }
 
-  renderStatus(set, setIndex) {
-    if (setIndex === 0) {
-      return 'Warmup';
-    } else if (setIndex === set.length - 1) {
-      return 'Cooldown';
-    } else if (setIndex % 2 === 1) {
-      return 'Run';
-    }
-
-    return 'Walk';
-  }
 
   controlTimer(shouldPlay) {
     const { set, status } = this.state;
@@ -152,21 +146,31 @@ class TimerContainer extends Component {
           status: this.renderStatus(set, setIndex - 1),
         });
       }
+    } else if (setIndex === set.length - 1) {
+      this.setState({ duration: 0 });
     } else {
-      if (setIndex === set.length - 1) {
-        this.setState({ duration: 0 });
-      } else {
-        this.setState({
-          duration: set[setIndex + 1],
-          setIndex: setIndex + 1,
-          status: this.renderStatus(set, setIndex + 1),
-        });
-      }
+      this.setState({
+        duration: set[setIndex + 1],
+        setIndex: setIndex + 1,
+        status: this.renderStatus(set, setIndex + 1),
+      });
     }
   }
 
   prettyMinutes(seconds) {
     return Duration.fromObject({ seconds }).toFormat('mm:ss');
+  }
+
+  renderStatus(set, setIndex) {
+    if (setIndex === 0) {
+      return 'Warmup';
+    } else if (setIndex === set.length - 1) {
+      return 'Cooldown';
+    } else if (setIndex % 2 === 1) {
+      return 'Run';
+    }
+
+    return 'Walk';
   }
 
   render() {
@@ -191,7 +195,11 @@ class TimerContainer extends Component {
       <div>
         <h1>Week {week}<br />Workout {workout}</h1>
         <FlexContainer>
-          <HeroTimer status={status} duration={prettyDuration} pulse={duration <= 5 && setIndex !== set.length - 1} />
+          <HeroTimer
+            status={status}
+            duration={prettyDuration}
+            pulse={duration <= 5 && setIndex !== set.length - 1}
+          />
           <ElapsedRemaining elapsed={prettyElapsed} remaining={prettyRemaining} />
           <PlayPause
             controlTimer={this.controlTimer}
@@ -209,12 +217,15 @@ class TimerContainer extends Component {
 }
 
 TimerContainer.defaultProps = {
+  tts: false,
   week: 1,
   workout: 1,
 };
 
 TimerContainer.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
+  tts: PropTypes.bool,
   week: PropTypes.number,
   workout: PropTypes.number,
 };

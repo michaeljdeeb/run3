@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import pulse from '../utils/pulseStyle';
+import pulseStyle from '../utils/pulseStyle';
 
 const Wrapper = styled.div`
   align-items: center;
@@ -11,7 +12,7 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  animation: ${props => props.pulse ? `${pulse} 1s infinite` : 'none'};
+  animation: ${props => (props.pulse ? `${pulseStyle} 1s infinite` : 'none')};
   display: flex;
   font-size: 1.647rem;
   font-weight: 700;
@@ -24,10 +25,10 @@ const HeroText = styled.div`
 `;
 
 const Congratulations = styled.div`
-  animation: ${pulse} 1s infinite;
+  animation: ${pulseStyle} 1s infinite;
 `;
 
-const HeroTimer = props => {
+const HeroTimer = (props) => {
   const { duration, pulse, status } = props;
   const congratulations = (
     <Congratulations>
@@ -47,6 +48,18 @@ const HeroTimer = props => {
       { status === 'Complete' ? congratulations : '' }
     </Wrapper>
   );
+};
+
+HeroTimer.defaultProps = {
+  duration: '00:00',
+  pulse: false,
+
+};
+
+HeroTimer.propTypes = {
+  duration: PropTypes.string,
+  pulse: PropTypes.bool,
+  status: PropTypes.string.isRequired,
 };
 
 export default HeroTimer;

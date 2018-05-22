@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -58,5 +59,9 @@ class Schedule extends Component {
     );
   }
 }
+
+Schedule.propTypes = {
+  progress: PropTypes.object.isRequired,
+};
 
 export default Schedule;

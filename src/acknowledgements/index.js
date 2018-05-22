@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Contact from '../contact';
@@ -39,5 +40,9 @@ class Acknowledgements extends PureComponent {
     );
   }
 }
+
+Acknowledgements.propTypes = {
+  dispatch: PropTypes.any.isRequired,
+};
 
 export default Acknowledgements;

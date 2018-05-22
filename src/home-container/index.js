@@ -6,14 +6,6 @@ import Disclaimer from '../disclaimer';
 import GetStarted from '../get-started';
 
 class HomeContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      week: 1,
-      workout: 1,
-    };
-  }
-
   static getDerivedStateFromProps(nextProps, prevState) {
     const { week, workout } = prevState;
     const { progress } = nextProps;
@@ -41,6 +33,14 @@ class HomeContainer extends Component {
     return {
       week: Number(next[0]),
       workout: Number(next[2]),
+    };
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      week: 1,
+      workout: 1,
     };
   }
 

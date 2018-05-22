@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faInfo, faInfoCircle, faSlidersH, faStar, faStepBackward, faStepForward, faTimesCircle } from '@fortawesome/fontawesome-free-solid';
 import { faCalendar, faPauseCircle, faPlayCircle, faStar as faStarO } from '@fortawesome/fontawesome-free-regular';
@@ -20,5 +21,9 @@ const mapTextToIcon = {
 const Icon = props => (
   <FontAwesomeIcon {...props} icon={mapTextToIcon[props.icon]} />
 );
+
+Icon.propTypes = {
+  icon: PropTypes.string.isRequired,
+};
 
 export default Icon;

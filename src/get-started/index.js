@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -24,6 +25,16 @@ const GetStarted = (props) => {
       <HeroLink to={`/week/${week}/workout/${workout}`}>{text}</HeroLink>
     </HeroContainer>
   );
+};
+
+GetStarted.defaultProps = {
+  week: 1,
+  workout: 1,
+};
+
+GetStarted.propTypes = {
+  week: PropTypes.number,
+  workout: PropTypes.number,
 };
 
 export default GetStarted;

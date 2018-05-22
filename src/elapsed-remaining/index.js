@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -28,6 +29,16 @@ const ElapsedRemaining = (props) => {
       </TimeContainer>
     </Container>
   );
+};
+
+ElapsedRemaining.defaultProps = {
+  elapsed: '00:00',
+  remaining: '00:00',
+};
+
+ElapsedRemaining.propTypes = {
+  elapsed: PropTypes.string,
+  remaining: PropTypes.string,
 };
 
 export default ElapsedRemaining;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Route, Switch, withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -38,8 +39,8 @@ const Background = styled.div`
 `;
 
 const Header = styled.div`
-  background-color: ${props => props.blur ? props.backgroundAlpha : props.background};
-  backdrop-filter: ${props => props.blur ? 'blur(20px)' : 'none'};
+  background-color: ${props => (props.blur ? props.backgroundAlpha : props.background)};
+  backdrop-filter: ${props => (props.blur ? 'blur(20px)' : 'none')};
   height: env(safe-area-inset-top);
   left: 0;
   position: fixed;
@@ -52,7 +53,7 @@ const Info = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-top: 0.75rem;
-  visibility: ${props => props.hide ? 'hidden' : 'visible'};
+  visibility: ${props => (props.hide ? 'hidden' : 'visible')};
 `;
 
 class App extends Component {
@@ -63,12 +64,15 @@ class App extends Component {
     }
   }
 
-  setLastViewed() {
-    this.setState({ lastViewed: this.props.location.pathname });
-  }
-
   render() {
-    const { accent, accentAlpha, background, dispatch, lastViewed, progress } = this.props;
+    const {
+      accent,
+      accentAlpha,
+      background,
+      dispatch,
+      lastViewed,
+      progress,
+    } = this.props;
     const { pathname } = this.props.location;
 
     const renderInfo = /acknowledgements/.test(pathname) ? (
@@ -122,6 +126,22 @@ class App extends Component {
     );
   }
 }
+
+App.defaultProps = {
+  lastViewed: '/',
+  themeLocked: false,
+};
+
+App.propTypes = {
+  accent: PropTypes.string.isRequired,
+  accentAlpha: PropTypes.string.isRequired,
+  background: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  lastViewed: PropTypes.string,
+  location: PropTypes.object.isRequired,
+  progress: PropTypes.object.isRequired,
+  themeLocked: PropTypes.bool,
+};
 
 const mapStateToProps = state => (
   {

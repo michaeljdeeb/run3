@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -7,8 +8,8 @@ import Icon from '../icon';
 import supportsBackdrop from '../utils/supportsBackdrop';
 
 const Nav = styled.nav`
-  background-color: ${props => props.blur ? props.accentAlpha : props.accent};
-  backdrop-filter: ${props => props.blur ? 'blur(20px)' : 'none'};
+  background-color: ${props => (props.blur ? props.accentAlpha : props.accent)};
+  backdrop-filter: ${props => (props.blur ? 'blur(20px)' : 'none')};
   bottom: 0;
   display: flex;
   justify-content: space-around;
@@ -77,5 +78,11 @@ const Navigation = props => (
     </StyledNavLink>
   </Nav>
 );
+
+Navigation.propTypes = {
+  accent: PropTypes.string.isRequired,
+  accentAlpha: PropTypes.string.isRequired,
+  background: PropTypes.string.isRequired,
+};
 
 export default Navigation;

@@ -48,7 +48,7 @@ const Submit = styled.button`
   border-radius: 3rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  margin-top: ${props => props.message ? '1rem' : 0};
+  margin-top: ${props => (props.message ? '1rem' : 0)};
   padding: 0.5rem 1rem;
   text-transform: uppercase;
 `;
