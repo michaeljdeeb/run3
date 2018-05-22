@@ -13,6 +13,7 @@ Run3 is a Progressive Web App (PWA) for becoming a runner. The project was boots
 - :signal_strength: App works without internet access (after initial load).
 
 ## Notes
+- Due to the randomness, if you get unlucky and land on yellow, the app is pretty unreadable.
 - iOS still has a ways to go to better support PWAs. You have to leave the app open or it will lose its state. Also, enabling text-to-speech causes your music to pause indefinitely. I've filed a bug report for this, but it's possible it won't be considered a bug.
 - Android has none of the above problems, but `backdrop-filter` is behind a flag in Chrome. :cry:
 
