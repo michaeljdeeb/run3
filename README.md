@@ -11,7 +11,7 @@ Run3 is a Progressive Web App (PWA) for starting to run. The project was bootstr
 
 ## Notes
 - iOS still has a ways to go to better support PWAs. You have to leave the app open or it will lose its state. Also, enabling text-to-speech causes your music to pause indefinitely. I've filed a bug report for this, but it's possible it's won't be considered a bug.
-- Android has none of the above problems.
+- Android has none of the above problems, but `backdrop-filter` is behind a flag in Chrome.
 
 ## Get Started
 1. `git clone https://github.com/michaeljdeeb/run3`
