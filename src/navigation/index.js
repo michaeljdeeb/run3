@@ -18,6 +18,7 @@ const Nav = styled.nav`
   padding-bottom: env(safe-area-inset-bottom);
   right: 0;
   position: fixed;
+  z-index: 1;
 `;
 
 const StyledNavLink = styled(NavLink)`
