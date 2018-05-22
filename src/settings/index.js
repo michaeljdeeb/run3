@@ -8,25 +8,32 @@ import { setColors } from '../redux/colors';
 import { toggleThemeLock, toggleTts } from '../redux/settings';
 import generateColors from '../utils/generateColors';
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 const Button = styled.button`
   border: 0.2rem solid #fff;
   border-radius: 3rem;
   font-weight: 700;
   padding: 0.5rem 1rem;
-  margin-top: 0.5rem;
+  margin-top: 0.7rem;
   text-transform: uppercase;
 `;
 
 const Label = styled.label`
   align-items: center;
+  background: rgba(255, 255, 255, 0.15);
   display: flex;
   font-size: 1.1rem;
-  padding: .4rem 0;
-  text-transform: uppercase;
+  justify-content: space-between;
+  margin: 0 -0.75rem;
+  padding: 0.82rem 0.75rem;
 `;
 
 const StyledToggle = styled(Toggle)`
-  margin-right: 1.17647rem;
+  // margin-right: 1.17647rem;
 
   &.react-toggle {
     touch-action: pan-x;
@@ -171,14 +178,17 @@ const StyledToggle = styled(Toggle)`
   }
 `;
 
-const SettingsCategory = styled.h3`
+const Heading = styled.h3`
+  font-size: 1rem;
+  font-weight: 700;
   margin-bottom: 0.25rem;
+  margin-top: 2rem;
+  text-transform: uppercase;
 `;
 
-const SubHeading = styled.h5`
-  margin-bottom: 0.25rem;
+const Warning = styled.div`
+  font-size: 0.9rem;
   margin-top: 0.25rem;
-  text-transform: uppercase;
 `;
 
 const Settings = (props) => {
@@ -190,16 +200,16 @@ const Settings = (props) => {
     tts,
   } = props;
   const ttsWarning = tts ? (
-    <div>
-      <SubHeading>Note</SubHeading>
+    <Warning>
       Speaking instructions requires the use of headphones or your device to not be silenced. The app may also pause your music indefinitely, even after the app has finished speaking.
-    </div>
+    </Warning>
   ) : '';
   return (
     <div>
       <h1>Settings</h1>
-      <SettingsCategory>Theme</SettingsCategory>
+      <Heading>Theme</Heading>
       <Label>
+        Lock Theme Colors
         <StyledToggle
           accent={accent}
           background={background}
@@ -207,13 +217,13 @@ const Settings = (props) => {
           icons={false}
           onChange={() => dispatch(toggleThemeLock(!themeLocked))}
         />
-        Lock Theme Colors
       </Label>
-      <div>
+      <ButtonContainer>
         <Button onClick={() => dispatch(setColors(generateColors()))}>Change Theme Colors</Button>
-      </div>
-      <SettingsCategory>Other</SettingsCategory>
+      </ButtonContainer>
+      <Heading>Other</Heading>
       <Label>
+        Speak Instructions
         <StyledToggle
           accent={accent}
           background={background}
@@ -222,7 +232,6 @@ const Settings = (props) => {
           icons={false}
           onChange={() => dispatch(toggleTts(!tts))}
         />
-        Speak Instructions
       </Label>
       { ttsWarning }
     </div>

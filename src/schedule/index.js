@@ -12,6 +12,7 @@ const WorkoutList = styled.ol`
   flex-direction: column;
   justify-content: space-around;
   list-style: none;
+  margin: 0;
   padding: 0;
 `;
 
@@ -19,14 +20,18 @@ const FlexLink = styled(Link)`
   align-items: center;
   background: rgba(255, 255, 255, 0.15);
   display: flex;
-  justify-content: flex-start;
-  margin: 0.2rem 0;
-  padding: 0.5rem 1.5rem;
+  justify-content: space-between;
+  margin: 0.1rem -0.75rem 0.1rem;
+  padding: 0.5rem 0.75rem;
   text-decoration: none;
 `;
 
-const ListText = styled.div`
-  margin-left: 1rem;
+const Week = styled.h3`
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  margin-top: 2rem;
+  text-transform: uppercase;
 `;
 
 
@@ -37,14 +42,14 @@ class Schedule extends Component {
       const renderWeek = Object.keys(schedule[week]).map(workout => (
         <li key={`${week}-${workout}`}>
           <FlexLink to={`/week/${week}/workout/${workout}`} workout={workout}>
+            Workout {workout}
             <Icon icon={progress[`${week}-${workout}`] ? 'complete' : 'incomplete'} size="2x" />
-            <ListText>Workout {workout}</ListText>
           </FlexLink>
         </li>
       ));
 
       return [
-        <h3 key={`h3-${week}`}>Week {week}</h3>,
+        <Week key={`h3-${week}`}>Week {week}</Week>,
         <WorkoutList key={`ol-${week}`}>
           { renderWeek }
         </WorkoutList>,
