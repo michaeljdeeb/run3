@@ -1,15 +1,16 @@
 # Run3
 
-Run3 is a Progressive Web App (PWA) for starting to run. The project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+Run3 is a Progressive Web App (PWA) for becoming a runner. The project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+
 ![Run3 app screenshots](/.github/run3-screenshots.png)
-The set of images above are what the web app looks like when added to your home screen.
+:arrow_up: The set of images above are what the web app looks like when added to your home screen.
 
 ## Goals
-- Adhere _mostly_ to [Airbnb's JavaScript Style Guide](https://github.com/airbnb/javascript).
-- Style the app to match native iOS apps.
-- Theme the app using random, monochromatic colors and make design decisions based around that.
-- Explore CSS-in-JS (This project uses [styled components](https://www.styled-components.com).
-- App works without internet access (after initial load).
+- :book: Adhere _mostly_ to [Airbnb's JavaScript Style Guide](https://github.com/airbnb/javascript).
+- :apple: Style the app to match native iOS apps.
+- :art: Theme the app using random, monochromatic colors and make design decisions based around that.
+- :nail_care: Explore CSS-in-JS (This project uses [styled components](https://www.styled-components.com)).
+- :signal_strength: App works without internet access (after initial load).
 
 ## Notes
 - iOS still has a ways to go to better support PWAs. You have to leave the app open or it will lose its state. Also, enabling text-to-speech causes your music to pause indefinitely. I've filed a bug report for this, but it's possible it's won't be considered a bug.
